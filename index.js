@@ -11,6 +11,11 @@ app.use(express.static("./public"));
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/public/" + startPage);
 })
+
+app.get('/create-bookings', (req, res) => {
+    //
+})
+
 server = app.listen(PORT, function () {
     const address = server.address();
     const baseUrl = `http://${address.address == "::" ? 'localhost' :
