@@ -1,12 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script src="js/script.js"></script> <!-- Ensure the editBooking function is in script.js -->
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Edit Booking</title>    
 </head>
+
 <body>
-    <head>Test HTML</head>
-    <p>Test Again</p>
+
+    <form onsubmit="editBooking(event)" class="booking-form">
+        <h2>Edit Booking</h2>
+
+        <!-- Hidden field for booking ID -->
+        <input type="hidden" id="bookingId" value="">
+
+        <div class="form-group">
+            <label for="customerName">Customer Name</label>
+            <input type="text" required id="customerName" class="form-control" placeholder="Enter your name">
+        </div>
+
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" required id="date" class="form-control">
+        </div>
+        
+        <div class="form-group">
+            <label for="time">Time</label>
+            <input type="time" required id="time" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="guests">Number Of Guests</label>
+            <input type="number" required id="guests" class="form-control" placeholder="Enter number of guests!">
+        </div>
+
+        <div class="form-group">
+            <label for="specialRequests">Special Requests</label>
+            <input type="text" id="specialRequests" class="form-control" placeholder="Any special requests?">
+        </div>
+
+        <button type="submit" class="btn">Update Booking</button>
+    </form>
+
 </body>
 </html>
