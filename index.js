@@ -21,7 +21,7 @@ app.use('/', routes);
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/public/" + startPage);
-});
+})
 
 const server = app.listen(PORT, function () {
     const address = server.address();
