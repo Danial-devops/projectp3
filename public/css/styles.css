@@ -1,13 +1,16 @@
-/* Center the form in the viewport */
 body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    margin: 0;
-    background: #f7f8fc;
-    font-family: Arial, sans-serif;
-    color: #333;
+    background-image: url('../images/rest.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 /* Form container */
@@ -76,4 +79,30 @@ body {
 .form-control::placeholder {
     color: #999;
     opacity: 0.8;
+}
+
+
+
+.return-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #141b14;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.return-button:hover {
+    background-color: #333;
+}
+
+h1 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
 }
