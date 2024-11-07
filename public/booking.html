@@ -24,11 +24,29 @@
             border-radius: 8px;
             padding: 20px;
             box-sizing: border-box;
+            text-align: center;
+        }
+        
+        .return-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #141b14;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        .return-button:hover {
+            background-color: #333;
         }
         
         h1 {
             color: #333;
-            text-align: center;
             font-size: 24px;
             margin-bottom: 20px;
         }
@@ -73,6 +91,8 @@
     </style>
 </head>
 <body>
+    <button class="return-button" onclick="history.back()">Return</button>
+
     <div class="container">
         <h1>Restaurant Bookings</h1>
         <div id="bookings-container" class="loading">Loading bookings...</div>

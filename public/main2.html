@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            flex-direction: column;
+            background-image: url('images/rest.jpeg'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 1); 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            width: 100%;
+            max-width: 250px;
+        }
+
+        .nav-button {
+            display: block;
+            width: 200px;
+            margin: 10px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #141b14;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .nav-button:hover {
+            background-color: #333;
+        }
+
+        .toggle-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #141b14;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .toggle-button:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Main Page</h1>
+
+    <button class="toggle-button" onclick="togglePage()">Switch to Admin</button>
+
+    <div class="container">
+    </div>
+
+    <script>
+        function togglePage() {
+            window.location.href = window.location.href.includes('main1') ? 'main2.html' : 'main1.html';
+        }
+    </script>
+
+</body>
+</html>
