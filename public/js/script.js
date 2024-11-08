@@ -33,3 +33,67 @@ function createBooking(){
 
 
 }
+
+//for booking
+
+async function fetchBookings() {
+    try {
+        const response = await fetch('http://localhost:3000/bookings');
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status}`);
+        }
+
+        const bookings = await response.json();
+        displayBookings(bookings);
+    } catch (error) {
+        document.getElementById('bookings-container').innerHTML = `<p>${error.message}</p>`;
+    }
+}
+
+function displayBookings(bookings) {
+    if (bookings.length === 0) {
+        document.getElementById('bookings-container').innerHTML = '<p>No bookings found.</p>';
+        return;
+    }
+
+    let table = `
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Guests</th>
+                    <th>Special Requests</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
+    bookings.forEach(booking => {
+        table += `
+            <tr>
+                <td>${booking.customerName}</td>
+                <td>${booking.date}</td>
+                <td>${booking.time}</td>
+                <td>${booking.numberOfGuests}</td>
+                <td>${booking.specialRequests}</td>
+                <td>
+                    <a href="edit-booking/${booking._id}" class="edit-button">Edit</a>
+                </td>
+            </tr>
+        `;
+    });
+
+    table += '</tbody></table>';
+    document.getElementById('bookings-container').innerHTML = table;
+}
+
+fetchBookings()
+
+//for main1 and main 2 
+
+function togglePage() {
+    window.location.href = window.location.href.includes('main1') ? 'main2.html' : 'main1.html';
+}
