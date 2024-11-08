@@ -1,0 +1,108 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('../images/rest.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Form container */
+.booking-form {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Form title */
+.booking-form h2 {
+    margin-bottom: 20px;
+    color: #555;
+}
+
+/* Form group (input fields and labels) */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+/* Labels */
+.form-group label {
+    font-weight: bold;
+    color: #777;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+/* Input fields */
+.form-control {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+.form-control:focus {
+    border-color: #66afe9;
+    outline: none;
+    box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+.btn {
+    padding: 12px;
+    width: 100%;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.form-control::placeholder {
+    color: #999;
+    opacity: 0.8;
+}
+
+
+
+.return-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #141b14;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.return-button:hover {
+    background-color: #333;
+}
+
+h1 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
