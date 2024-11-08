@@ -34,13 +34,8 @@ function createBooking(){
 
 }
 
-//for main1 and main2
 
-function togglePage() {
-window.location.href = window.location.href.includes('main1') ? 'main2.html' : 'main1.html';
-}
-
-//for booking 
+//for booking
 
 async function fetchBookings() {
     try {
@@ -72,6 +67,7 @@ function displayBookings(bookings) {
                     <th>Guests</th>
                     <th>Special Requests</th>
                     <th>Edit</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -97,3 +93,9 @@ function displayBookings(bookings) {
 }
 
 fetchBookings();
+
+//for main1 and main 2 
+
+function togglePage() {
+    window.location.href = window.location.href.includes('main1') ? 'main2.html' : 'main1.html';
+}
