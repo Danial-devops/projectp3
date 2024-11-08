@@ -13,8 +13,11 @@
     <form onsubmit="editBooking(event)" class="booking-form">
         <h2>Edit Booking</h2>
 
-        <!-- Hidden field for booking ID -->
-        <input type="hidden" id="bookingId" value="">
+        <!-- Input field for booking ID -->
+        <div class="form-group">
+            <label for="bookingId">Booking ID</label>
+            <input type="text" required id="bookingId" class="form-control" placeholder="Enter booking ID">
+        </div>
 
         <div class="form-group">
             <label for="customerName">Customer Name</label>
@@ -48,7 +51,7 @@
         function editBooking(event) {
             event.preventDefault();  // Prevents page reload
 
-            const bookingId = document.getElementById("bookingId").value; // Retrieve booking ID
+            const bookingId = document.getElementById("bookingId").value; // Retrieve booking ID directly from input
             const bookingData = {
                 customerName: document.getElementById("customerName").value,
                 date: document.getElementById("date").value,
@@ -77,7 +80,6 @@
 
             request.send(JSON.stringify(bookingData));
         }
-
     </script>
 
 </body>
