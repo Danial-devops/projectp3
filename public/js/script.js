@@ -67,7 +67,6 @@ function displayBookings(bookings) {
                     <th>Guests</th>
                     <th>Special Requests</th>
                     <th>Edit</th>
-                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
