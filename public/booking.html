@@ -4,117 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Bookings</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-image: url('images/rest.jpeg'); 
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-        
-        .container {
-            max-width: 800px;
-            width: 100%;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            padding: 20px;
-            box-sizing: border-box;
-            text-align: center;
-        }
-        
-        .return-button {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-            color: white;
-            background-color: #141b14;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 10;
-        }
-        
-        .return-button:hover {
-            background-color: #333;
-        }
-        
-        h1 {
-            color: #333;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            overflow: hidden;
-            border-radius: 8px;
-        }
-        
-        th, td {
-            padding: 12px;
-            text-align: left;
-            font-size: 16px;
-        }
-        
-        th {
-            background-color: #141b14;
-            color: white;
-            font-weight: 600;
-        }
-        
-        td {
-            background-color: #fafafa;
-        }
-
-        tr:nth-child(even) td {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover td {
-            background-color: #e8f4e8;
-        }
-
-        .loading {
-            font-size: 18px;
-            color: #060100;
-            text-align: center;
-        }
-
-        .view-details-button {
-            padding: 6px 6px;
-            font-size: 14px;
-            color: white;
-            background-color: #007bff;
-            border: none;
-            border-radius: 8px;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .view-details-button:hover {
-            background-color: #0056b3;
-        }
-
-    </style>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
-    <button class="return-button" onclick="history.back()">Return</button>
+<body class="view-body">
+    <button class="view-return-button" onclick="history.back()">Return</button>
 
-    <div class="container">
-        <h1>Restaurant Bookings</h1>
+    <div class="view-container">
+        <h1 class="view-h1">Restaurant Bookings</h1>
         <div id="bookings-container" class="loading">Loading bookings...</div>
     </div>
 

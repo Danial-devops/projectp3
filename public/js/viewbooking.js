@@ -19,7 +19,7 @@ function displayBookings(bookings) {
     }
 
     let table = `
-        <table>
+        <table class="view-table">
             <thead>
                 <tr>
                     <th>Customer Name</th>
