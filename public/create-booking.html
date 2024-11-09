@@ -1,15 +1,15 @@
-<!DOCTYPE html>
+:qa<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/script.js"></script>
+    <script src="js/createBooking.js"></script>
     <link rel="stylesheet" href="css/styles.css">
     <title>Restaurant Booking Form</title>    
 </head>
 
-<body>
+<body onload="dateRestriction()">
     <button class="view-return-button" onclick="window.location.href='main1.html'">Return</button>
 
     <form onsubmit="createBooking(event)" class="booking-form">
@@ -27,12 +27,12 @@
         
         <div class="form-group">
             <label for="time">Time</label>
-            <input type="time" required id="time" class="form-control">
+            <input type="time" required id="time" class="form-control" min="10:00" max="22:00">
         </div>
 
         <div class="form-group">
             <label for="guests">Number Of Guests</label>
-            <input type="number" required id="guests" class="form-control" placeholder="Enter number of guests!">
+            <input type="number" required id="guests" class="form-control" placeholder="Enter number of guests!" max="15">
         </div>
 
         <div class="form-group">
