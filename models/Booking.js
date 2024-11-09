@@ -25,8 +25,4 @@ const bookingSchema = new mongoose.Schema({
 
 
 const Booking = mongoose.model('Booking', bookingSchema, 'Restaurant Bookings');
-<<<<<<< HEAD
 module.exports = Booking;
-=======
-module.exports = Booking;
->>>>>>> edit-booking
