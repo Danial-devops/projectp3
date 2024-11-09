@@ -1,4 +1,4 @@
-const Timeslot = require('../models/timelsots');  
+const Timeslot = require('./timeslot');  
 const Booking = require('../models/Booking'); 
 
 

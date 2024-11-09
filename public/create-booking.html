@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/script.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Restaurant Booking Form</title>    
+</head>
+
+<body>
+    <button class="view-return-button" onclick="window.location.href='main1.html'">Return</button>
+
+    <form onsubmit="createBooking(event)" class="booking-form">
+        <h2>Book a Table</h2>
+
+        <div class="form-group">
+            <label for="customerName">Customer Name</label>
+            <input type="text" required id="customerName" class="form-control" placeholder="Enter your name">
+        </div>
+
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" required id="date" class="form-control">
+        </div>
+        
+        <div class="form-group">
+            <label for="time">Time</label>
+            <input type="time" required id="time" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="guests">Number Of Guests</label>
+            <input type="number" required id="guests" class="form-control" placeholder="Enter number of guests!">
+        </div>
+
+        <div class="form-group">
+            <label for="specialRequests">Special Requests</label>
+            <input type="text" id="specialRequests" class="form-control" placeholder="Any special requests?">
+        </div>
+
+        <button type="submit" class="btn">Book Now</button>
+    </form>
+
+   
+</body>
+</html>

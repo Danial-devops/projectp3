@@ -2,7 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
-const routes = require('./routes/routes');
+const routes = require('./utils/BookingRoute');
+const EditRoutes = require('./utils/editBookingRoute');
+const TimeslotRoute = require('./utils/TimeslotRoute');
 const app = express();
 
 const PORT = process.env.PORT || 5050;
@@ -19,14 +21,18 @@ mongoose.connect(DB_Connect, { useNewUrlParser: true, useUnifiedTopology: true }
 
 app.use('/', routes);
 
+app.use('/', EditRoutes); 
+
+app.use('/api/timeslots', TimeslotRoute);
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/public/" + startPage);
-});
+})
 
 const server = app.listen(PORT, function () {
     const address = server.address();
     const baseUrl = `http://${address.address == "::" ? 'localhost' : address.address}:${address.port}`;
-    console.log(`Demo project at: ${baseUrl}`);
+    console.log(`Demo project at: ${baseUrl}/main1.html`);
 });
 
 module.exports = { app, server };
