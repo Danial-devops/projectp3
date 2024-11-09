@@ -26,7 +26,6 @@ function displayBookings(bookings) {
                     <th>Date</th>
                     <th>Time</th>
                     <th>Guests</th>
-                    <th>Special Requests</th>
                     <th>Details</th>
                 </tr>
             </thead>
@@ -40,7 +39,6 @@ function displayBookings(bookings) {
                 <td>${booking.date}</td>
                 <td>${booking.time}</td>
                 <td>${booking.numberOfGuests}</td>
-                <td>${booking.specialRequests}</td>
                 <td>
                     <a href="booking-details.html?id=${booking._id}" class="view-details-button">Details</a>
                 </td>

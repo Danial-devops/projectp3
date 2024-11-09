@@ -30,5 +30,5 @@ document.getElementById('back-button').addEventListener('click', function () {
 });
 
 document.getElementById('edit-button').addEventListener('click', function () {
-    window.location.href = `/edit-booking/${bookingId}`;
+    window.location.href = `/edit-booking.html?${bookingId}`;
 });
