@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
-const routes = require('./routes/routes');
+const routes = require('./Util/editBookingRoute');
 const app = express();
 
 const PORT = process.env.PORT || 5050;
@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 const server = app.listen(PORT, function () {
     const address = server.address();
     const baseUrl = `http://${address.address == "::" ? 'localhost' : address.address}:${address.port}`;
-    console.log(`Demo project at: ${baseUrl}/main1.html`);
+    console.log(`Demo project at: ${baseUrl}/edit-booking.html`);
 });
 
 module.exports = { app, server };
