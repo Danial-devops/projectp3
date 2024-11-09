@@ -14,6 +14,9 @@ After installing dependencies, you can start the application
 The main functions of this application include:
 
 View Bookings: Allows users to view existing bookings in the system.
+
 View Timeslots: Enables users to check available timeslots for booking.
+
 Create Booking: Provides an interface for users to select a date, time, number of guests, and specify any special requests (e.g., birthday celebrations).
+
 Edit Booking: Lets users modify the timing, number of guests, and other details of an existing booking.
