@@ -4,16 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/script.js"></script>
+    <title>Edit Booking</title>
     <link rel="stylesheet" href="css/styles.css">
-    <title>Restaurant Booking Form</title>    
+    <script src="js/editBooking.js"></script>
 </head>
 
 <body>
     <button class="view-return-button" onclick="window.location.href='main1.html'">Return</button>
 
-    <form onsubmit="createBooking(event)" class="booking-form">
-        <h2>Book a Table</h2>
+    <form onsubmit="editBooking(event)" class="booking-form">
+        <h2>Edit Booking</h2>
+
+        <!-- Input field to edit booking -->
+        <div class="form-group">
+            <label for="bookingId">Booking ID</label>
+            <input type="text" required id="bookingId" class="form-control" placeholder="Enter booking ID">
+        </div>
 
         <div class="form-group">
             <label for="customerName">Customer Name</label>
@@ -24,7 +30,7 @@
             <label for="date">Date</label>
             <input type="date" required id="date" class="form-control">
         </div>
-        
+
         <div class="form-group">
             <label for="time">Time</label>
             <input type="time" required id="time" class="form-control">
@@ -40,9 +46,28 @@
             <input type="text" id="specialRequests" class="form-control" placeholder="Any special requests?">
         </div>
 
-        <button type="submit" class="btn">Book Now</button>
+        <button type="submit" class="btn">Update Booking</button>
     </form>
 
-   
+    <!-- Table to show updated booking -->
+    <div id="bookingDetails">
+        <h2>Updated Booking Details</h2>
+        <table id="bookingTable" class="booking-table">
+            <thead>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Customer Name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Number of Guests</th>
+                    <th>Special Requests</th>
+                </tr>
+            </thead>
+            <tbody id="bookingTableBody"></tbody>
+        </table>
+        
+    </div>
+
 </body>
+
 </html>

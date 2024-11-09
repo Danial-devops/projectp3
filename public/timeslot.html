@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Timeslots</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="timeslot-body">
+    <button class="view-return-button" onclick="window.location.href='main1.html'">Return</button>
+
+    <div class="timeslot-container">
+        <h1 class="timeslot-h1">Available Timeslots</h1>
+
+        <!-- Filter Section -->
+        <div class="filters">
+            <label for="dateFilter">Filter by Date:</label>
+            <input type="date" id="dateFilter">
+
+            <label for="timeFilter">Filter by Time:</label>
+            <select id="timeFilter">
+                <option value="">Select Time</option>
+                <option value="10:00">10:00 AM</option>
+                <option value="12:00">12:00 PM</option>
+                <option value="14:00">2:00 PM</option>
+                <option value="16:00">4:00 PM</option>
+                <option value="18:00">6:00 PM</option>
+                <option value="20:00">8:00 PM</option>
+            </select>
+
+            <button id="filterButton">Apply Filters</button>
+        </div>
+
+        <!-- Timeslot List -->
+        <div id="timeslotList">
+            <!-- Available timeslots will be listed here -->
+        </div>
+    </div>
+
+    <script src="js/viewtimeslot.js"></script>
+</body>
+</html>
