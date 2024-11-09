@@ -396,3 +396,57 @@ tr:hover td {
 #bookingDetails td {
     background-color: #f9f9f9; 
 }
+
+/* timeslot */
+
+timeslot-body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.timeslot-container {
+    width: 80%;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+timeslot-h1 {
+    text-align: center;
+}
+
+.filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.filters label {
+    margin-right: 10px;
+}
+
+.filters input,
+.filters select {
+    padding: 5px;
+    width: 200px;
+}
+
+#timeslotList {
+    margin-top: 20px;
+}
+
+.timeslot {
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin: 5px 0;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+.timeslot p {
+    margin: 0;
+}

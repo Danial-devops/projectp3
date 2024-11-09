@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const routes = require('./utils/BookingRoute');
 const EditRoutes = require('./utils/editBookingRoute');
+const TimeslotRoute = require('./utils/TimeslotRoute');
 const app = express();
 
 const PORT = process.env.PORT || 5050;
@@ -21,6 +22,8 @@ mongoose.connect(DB_Connect, { useNewUrlParser: true, useUnifiedTopology: true }
 app.use('/', routes);
 
 app.use('/', EditRoutes); 
+
+app.use('/api/timeslots', TimeslotRoute);
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/public/" + startPage);
