@@ -2,7 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
-const routes = require('./utils/editBookingRoute');
+const routes = require('./utils/BookingRoute');
+const EditRoutes = require('./utils/editBookingRoute');
 const app = express();
 
 const PORT = process.env.PORT || 5050;
@@ -18,6 +19,8 @@ mongoose.connect(DB_Connect, { useNewUrlParser: true, useUnifiedTopology: true }
   .catch(err => console.error('MongoDB connection error:', err));
 
 app.use('/', routes);
+
+app.use('/', EditRoutes); 
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/public/" + startPage);
