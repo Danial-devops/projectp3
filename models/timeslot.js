@@ -17,7 +17,7 @@ const timeslotSchema = new mongoose.Schema({
 
 const Timeslot = mongoose.model('Timeslot', timeslotSchema, 'Restaurant Timeslots');
 
-// Function to get all available timeslots
+
 const getAllAvailableTimeslots = async () => {
     try {
         const timeslots = await Timeslot.find({ available: true });

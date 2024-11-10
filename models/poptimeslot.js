@@ -53,19 +53,18 @@ async function populateTimeslotsForMonths(startYear, startMonth, endYear, endMon
 }
 async function getAllAvailableTimeslots() {
     try {
-        // Retrieve all timeslots
+        
         const allTimeslots = await Timeslot.find();
 
-        // Retrieve all bookings (or add a date filter if needed)
+       
         const bookings = await Booking.find();
 
-        // Get the booked times
         const bookedTimes = bookings.map(booking => ({
-            date: booking.date.toISOString().split('T')[0], // Format the date to YYYY-MM-DD
+            date: booking.date.toISOString().split('T')[0], 
             time: booking.time
         }));
 
-        // Filter out the booked times from the available timeslots
+       
         const availableTimeslots = allTimeslots.filter(timeslot => {
             return !bookedTimes.some(booking => 
                 booking.date === timeslot.date.toISOString().split('T')[0] && booking.time === timeslot.time);

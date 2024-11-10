@@ -399,54 +399,94 @@ tr:hover td {
 
 /* timeslot */
 
-timeslot-body {
+/* Body styles */
+.timeslot-body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
 }
 
+/* Main container for timeslots */
 .timeslot-container {
     width: 80%;
+    max-width: 1200px;
     margin: 50px auto;
-    padding: 20px;
+    padding: 30px;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
-timeslot-h1 {
+/* Title of the page */
+.timeslot-h1 {
     text-align: center;
-}
-
-.filters {
-    display: flex;
-    justify-content: space-between;
+    font-size: 28px;
+    color: #333;
     margin-bottom: 20px;
 }
 
+/* Filter section */
+.filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
 .filters label {
+    font-size: 16px;
+    color: #555;
     margin-right: 10px;
 }
 
 .filters input,
 .filters select {
-    padding: 5px;
+    padding: 8px;
     width: 200px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
 }
 
+/* Apply button */
+#filterButton {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#filterButton:hover {
+    background-color: #45a049;
+}
+
+/* List of timeslots */
 #timeslotList {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
+/* Individual timeslot box */
 .timeslot {
-    padding: 10px;
+    padding: 15px;
     border: 1px solid #ddd;
-    margin: 5px 0;
-    border-radius: 4px;
+    margin: 10px 0;
+    border-radius: 8px;
     background-color: #f9f9f9;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.timeslot:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .timeslot p {
     margin: 0;
+    font-size: 16px;
+    color: #555;
 }
