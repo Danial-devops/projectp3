@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:3000/api/timeslots/available';
+const apiUrl = '/api/timeslots/available';
 
 // DOM elements
 const timeslotList = document.getElementById('timeslotList');

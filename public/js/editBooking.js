@@ -1,3 +1,37 @@
+// Get bookingId from the URL
+const urlParams = new URLSearchParams(window.location.search);
+const bookingId = urlParams.get('id');
+
+// Populate the Booking ID field if it's present in the URL
+if (bookingId) {
+    document.getElementById("bookingId").value = bookingId;
+    fetchBookingDetails(bookingId);
+}
+
+// Fetch the booking details using the booking ID
+async function fetchBookingDetails(bookingId) {
+    try {
+        const response = await fetch(`/booking/${bookingId}`);
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status}`);
+        }
+        const booking = await response.json();
+        displayBookingDetails(booking);
+    } catch (error) {
+        alert(`Error fetching booking details: ${error.message}`);
+    }
+}
+
+// Display booking details in the form fields
+function displayBookingDetails(booking) {
+    document.getElementById("customerName").value = booking.customerName;
+    document.getElementById("date").value = booking.date;
+    document.getElementById("time").value = booking.time;
+    document.getElementById("guests").value = booking.numberOfGuests;
+    document.getElementById("specialRequests").value = booking.specialRequests;
+}
+
+// Function to handle the form submission
 function editBooking(event) {
     event.preventDefault();  // Prevents page reload
 
@@ -8,6 +42,23 @@ function editBooking(event) {
     const numberOfGuests = document.getElementById("guests").value;
     const specialRequests = document.getElementById("specialRequests").value;
 
+    // Get current date
+    const currentDate = new Date();
+    const selectedDate = new Date(date);
+
+    // Limit the number of guests to 15
+    if (numberOfGuests > 15) {
+        alert("The number of guests cannot exceed 15.");
+        return;
+    }
+
+    // Ensure the selected date is not before the current date
+    if (selectedDate < currentDate) {
+        alert("The booking date cannot be before today.");
+        return;
+    }
+
+    // Time validation to between 10am - 10pm
     const [hour, minute] = time.split(':').map(Number);
     if (hour < 10 || hour > 22 || (hour === 22 && minute > 0)) {
         alert("Please choose a time between 10:00 AM and 10:00 PM.");
@@ -56,3 +107,4 @@ function editBooking(event) {
 
     request.send(JSON.stringify(bookingData));
 }
+

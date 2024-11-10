@@ -3,7 +3,7 @@ const bookingId = urlParams.get('id');
 
 async function fetchBookingDetails() {
     try {
-        const response = await fetch(`http://localhost:3000/booking/${bookingId}`);
+        const response = await fetch(`/booking/${bookingId}`);
         if (!response.ok) {
             throw new Error(`Error: ${response.status}`);
         }
@@ -30,5 +30,6 @@ document.getElementById('back-button').addEventListener('click', function () {
 });
 
 document.getElementById('edit-button').addEventListener('click', function () {
-    window.location.href = `/edit-booking.html?${bookingId}`;
+    const bookingId = urlParams.get('id');  // Get booking ID from current URL
+    window.location.href = `/edit-booking.html?id=${bookingId}`;  // Pass bookingId as query parameter
 });

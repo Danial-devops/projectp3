@@ -1,6 +1,6 @@
 async function fetchBookings() {
     try {
-        const response = await fetch('http://localhost:3000/bookings');
+        const response = await fetch('/bookings');
         if (!response.ok) {
             throw new Error(`Error: ${response.status}`);
         }
