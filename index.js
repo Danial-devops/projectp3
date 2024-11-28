@@ -3,10 +3,7 @@ const express = require('express');
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 
-const routes = require('./utils/BookingRoute');
-const createBookingRoute = require('./utils/createBookingRoute.js');
 const EditRoutes = require('./utils/editBookingRoute');
-const TimeslotRoute = require('./utils/TimeslotRoute');
 const app = express();
 
 const PORT = process.env.PORT || 5050;
@@ -21,13 +18,8 @@ mongoose.connect(DB_Connect, { useNewUrlParser: true, useUnifiedTopology: true }
   .then(() => console.log('Connected to MongoDB Atlas'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-app.use('/', routes);
-
 app.use('/', EditRoutes);
 
-app.use('/', createBookingRoute);
-
-app.use('/api/timeslots', TimeslotRoute);
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/public/" + startPage);
