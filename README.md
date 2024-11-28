@@ -6,7 +6,7 @@ To set up the project locally, follow these steps:
 
 Since the package.json file is not included in this repository, you’ll need to install the following dependencies manually:
 
-npm install body-parser dotenv express mongoose
+npm install body-parser dotenv express mongoose mocha chai@4.3.4 chai-http@4.3.0 ny
 
 
 After installing dependencies, you can start the application
