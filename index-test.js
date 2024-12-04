@@ -14,7 +14,7 @@ const startPage = "index.html";
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static("./public"));
+app.use(express.static("./instrumented"));
 
 mongoose.connect(DB_Connect)
   .then(() => console.log('Connected to MongoDB Atlas'))
@@ -24,9 +24,8 @@ app.use('/', CreateRoutes);
 app.use('/', BookingRoutes);
 app.use('/', EditRoutes);
 
-
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + "/public/" + startPage);
+    res.sendFile(__dirname + "/instrumented/" + startPage);
 })
 
 const server = app.listen(PORT, function () {

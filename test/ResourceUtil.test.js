@@ -2,11 +2,13 @@ const { describe, it, before, after } = require('mocha');
 const { expect } = require('chai');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const chaiAsPromised = require('chai-as-promised');
 const mongoose = require('mongoose');
-const Booking = require('../models/Booking.js'); // Ensure correct path
+const Booking = require('../models/Booking.js');
 const { app, server } = require('../index');
 
 chai.use(chaiHttp);
+chai.use(chaiAsPromised);
 
 let baseUrl;
 let createdBookingId;
@@ -15,42 +17,44 @@ describe('Booking API', () => {
     before(async () => {
         const { address, port } = await server.address();
         baseUrl = `http://${address === '::' ? 'localhost' : address}:${port}`;
-    
+
         // Create a sample booking for testing
         const booking = new Booking({
-            customerName: 'John Doe', // Required field
-            date: new Date('2024-12-01'), // Required field
-            time: '19:00', // Required field
-            numberOfGuests: 4, // Required field
-            specialRequests: 'Window seat, if possible', // Optional field
+            customerName: 'John Doe',
+            date: new Date('2024-12-01'),
+            time: '19:00',
+            numberOfGuests: 4,
+            specialRequests: 'Window seat, if possible',
         });
         const savedBooking = await booking.save();
         createdBookingId = savedBooking._id.toString();
     });
-    
 
     after(async () => {
-        // Delete only the test-created booking
+        // Delete test-created bookings
         await Booking.findByIdAndDelete(createdBookingId);
     
-        // Close the server after tests
+        // Close Mongoose connection
+        await mongoose.connection.close();
+    
+        // Close the HTTP server
         return new Promise((resolve) => {
             server.close(() => {
                 resolve();
             });
         });
     });
-    
+
     describe('PUT /edit-booking/:id', () => {
         it('should update an existing booking', (done) => {
             chai.request(baseUrl)
                 .put(`/edit-booking/${createdBookingId}`)
                 .send({
-                    customerName: 'Jane Doe', // Updated customer name
-                    date: new Date('2024-12-02'), // Updated date
-                    time: '20:00', // Updated time
-                    numberOfGuests: 2, // Updated number of guests
-                    specialRequests: 'Near the entrance', // Updated special request
+                    customerName: 'Jane Doe',
+                    date: new Date('2024-12-02'),
+                    time: '20:00',
+                    numberOfGuests: 2,
+                    specialRequests: 'Near the entrance',
                 })
                 .end((err, res) => {
                     expect(res).to.have.status(200);
@@ -64,7 +68,6 @@ describe('Booking API', () => {
                     done();
                 });
         });
-        
 
         it('should return 404 if booking does not exist', (done) => {
             chai.request(baseUrl)
@@ -92,4 +95,35 @@ describe('Booking API', () => {
                 });
         });
     });
+
+    describe('Booking Model Validation', () => {
+        it('should require all required fields', async () => {
+            const booking = new Booking({});
+            await expect(booking.save()).to.be.rejectedWith(/customerName.*required/i);
+            await expect(booking.save()).to.be.rejectedWith(/date.*required/i);
+            await expect(booking.save()).to.be.rejectedWith(/time.*required/i);
+            await expect(booking.save()).to.be.rejectedWith(/numberOfGuests.*required/i);
+        });
+
+        it('should require `date` to be a valid date', async () => {
+            const booking = new Booking({
+                customerName: 'John Doe',
+                date: 'invalid-date', 
+                time: '19:00',
+                numberOfGuests: 2
+            });
+            await expect(booking.validate()).to.be.rejectedWith(/Cast to date failed/);
+        });
+
+        it('should require `numberOfGuests` to be a number', async () => {
+            const booking = new Booking({
+                customerName: 'John Doe',
+                date: new Date(),
+                time: '19:00',
+                numberOfGuests: 'invalid-number' 
+            });
+            await expect(booking.validate()).to.be.rejectedWith(/Cast to Number failed/);
+        });
+    });
+
 });

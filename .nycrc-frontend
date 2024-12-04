@@ -4,9 +4,9 @@
         "html"
     ],
     "include": [
-        "utils/*.js"
+        " instrumented/**/*.js"
     ],
-    "reportDir": "coverage/backend",
+    "reportDir": "coverage/frontend",
     "check-coverage": true,
     "branches": 80,
     "lines": 80,
