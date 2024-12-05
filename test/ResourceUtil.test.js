@@ -13,7 +13,7 @@ chai.use(chaiAsPromised);
 let baseUrl;
 let createdBookingId;
 
-describe('Booking API', () => {
+describe('Edit Booking Backend Tests', () => {
     before(async () => {
         const { address, port } = await server.address();
         baseUrl = `http://${address === '::' ? 'localhost' : address}:${port}`;
@@ -31,13 +31,10 @@ describe('Booking API', () => {
     });
 
     after(async () => {
-        // Delete test-created bookings
+        // Delete booking made for test
         await Booking.findByIdAndDelete(createdBookingId);
-    
-        // Close Mongoose connection
+
         await mongoose.connection.close();
-    
-        // Close the HTTP server
         return new Promise((resolve) => {
             server.close(() => {
                 resolve();
@@ -45,26 +42,34 @@ describe('Booking API', () => {
         });
     });
 
-    describe('PUT /edit-booking/:id', () => {
+    describe('Edit Booking Validation', () => {
         it('should update an existing booking', (done) => {
             chai.request(baseUrl)
                 .put(`/edit-booking/${createdBookingId}`)
                 .send({
-                    customerName: 'Jane Doe',
-                    date: new Date('2024-12-02'),
+                    customerName: 'Downey Lowney',
+                    date: new Date('2025-12-02'),
                     time: '20:00',
                     numberOfGuests: 2,
                     specialRequests: 'Near the entrance',
                 })
                 .end((err, res) => {
+                    // Additional chai assertions
                     expect(res).to.have.status(200);
+                    expect(res.body).to.include.keys('message', 'updatedBooking');
                     expect(res.body.message).to.equal('Booking updated successfully');
-                    expect(res.body.updatedBooking).to.have.property('customerName', 'Jane Doe');
-                    expect(res.body.updatedBooking).to.have.property('date');
-                    expect(new Date(res.body.updatedBooking.date).toISOString()).to.equal(new Date('2024-12-02').toISOString());
-                    expect(res.body.updatedBooking).to.have.property('time', '20:00');
-                    expect(res.body.updatedBooking).to.have.property('numberOfGuests', 2);
-                    expect(res.body.updatedBooking).to.have.property('specialRequests', 'Near the entrance');
+
+                    const updatedBooking = res.body.updatedBooking;
+
+                    expect(updatedBooking).to.be.an('object').that.includes.all.keys(
+                        'customerName', 'date', 'time', 'numberOfGuests', 'specialRequests'
+                    );
+                    expect(updatedBooking.customerName).to.be.a('string').that.equals('Downey Lowney');
+                    expect(new Date(updatedBooking.date).toISOString()).to.equal(new Date('2025-12-02').toISOString());
+                    expect(updatedBooking.time).to.equal('20:00');
+                    expect(updatedBooking.numberOfGuests).to.be.a('number').that.equals(2);
+                    expect(updatedBooking.specialRequests).to.include('Near the entrance');
+
                     done();
                 });
         });
@@ -77,6 +82,7 @@ describe('Booking API', () => {
                 })
                 .end((err, res) => {
                     expect(res).to.have.status(404);
+                    expect(res.body).to.include.keys('message');
                     expect(res.body.message).to.equal('Booking not found');
                     done();
                 });
@@ -90,7 +96,7 @@ describe('Booking API', () => {
                 })
                 .end((err, res) => {
                     expect(res).to.have.status(500);
-                    expect(res.body.message).to.equal('Error updating booking');
+                    expect(res.body).to.have.property('message').that.includes('Error updating booking');
                     done();
                 });
         });
@@ -108,9 +114,9 @@ describe('Booking API', () => {
         it('should require `date` to be a valid date', async () => {
             const booking = new Booking({
                 customerName: 'John Doe',
-                date: 'invalid-date', 
+                date: 'invalid-date',
                 time: '19:00',
-                numberOfGuests: 2
+                numberOfGuests: 2,
             });
             await expect(booking.validate()).to.be.rejectedWith(/Cast to date failed/);
         });
@@ -120,10 +126,9 @@ describe('Booking API', () => {
                 customerName: 'John Doe',
                 date: new Date(),
                 time: '19:00',
-                numberOfGuests: 'invalid-number' 
+                numberOfGuests: 'invalid-number',
             });
             await expect(booking.validate()).to.be.rejectedWith(/Cast to Number failed/);
         });
     });
-
 });
