@@ -34,8 +34,10 @@ jobs:
         cp -r public/* instrumented/
         npx nyc instrument public instrumented
 
-    - name: Run frontend tests
-      run: npm run frontend-test
+    - name: Run frontend tests (Linux-compatible)
+      run: |
+        if [ -d ".nyc_output" ]; then rm -rf .nyc_output; fi
+        npx nyc --nycrc-path .nycrc-frontend cypress run
 
     - name: Run backend tests
       run: npx nyc --nycrc-path .nycrc-backend mocha
