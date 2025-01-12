@@ -17,20 +17,26 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '20.9.0' 
+        node-version: '20.9.0'
 
     - name: Install dependencies
       run: npm install
 
-    - name: Npm debugging
-      run: npm audit fix
+    - name: Debug environment variables
+      run: env
 
-    - name: Instrument frontend files
-      run: npm run frontend-instrument
+    - name: Ensure binaries are executable
+      run: chmod +x ./node_modules/.bin/*
+
+    - name: Instrument frontend files (Linux-specific)
+      run: |
+        mkdir -p instrumented
+        cp -r public/* instrumented/
+        npx nyc instrument public instrumented
 
     - name: Run frontend tests
       run: npm run frontend-test
-      
+
     - name: Run backend tests
       run: npx nyc --nycrc-path .nycrc-backend mocha
 
