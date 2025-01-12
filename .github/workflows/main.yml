@@ -23,7 +23,7 @@ jobs:
       run: npm install
 
     - name: Run backend tests
-      run: npm run backend-test
+      run: npx nyc --nycrc-path .nycrc-backend mocha
 
     - name: Instrument frontend files
       run: npm run frontend-instrument
