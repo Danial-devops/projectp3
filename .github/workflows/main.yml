@@ -25,14 +25,14 @@ jobs:
     - name: Npm debugging
       run: npm audit fix
 
-    - name: Run backend tests
-      run: npx nyc --nycrc-path .nycrc-backend mocha
-
     - name: Instrument frontend files
       run: npm run frontend-instrument
 
     - name: Run frontend tests
       run: npm run frontend-test
+      
+    - name: Run backend tests
+      run: npx nyc --nycrc-path .nycrc-backend mocha
 
     - name: Upload coverage report
       if: success()
