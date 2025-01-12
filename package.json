@@ -1,0 +1,31 @@
+{
+  "name": "danial-devops",
+  "version": "1.0.0",
+  "description": "This is a reference project for the DVOPS subject.",
+  "main": "index.js",
+  "scripts": {
+    "backend-test": "nyc --nycrc-path .nycrc-backend mocha",
+    "frontend-instrument": "xcopy public instrumented /I /E /Y & nyc instrument public instrumented",
+    "frontend-test-all": "if exist .nyc_output (rmdir /s /q .nyc_output) && nyc --nycrc-path .nycrc-frontend cypress run --browser chrome && nyc --nycrc-path .nycrc-frontend cypress run --browser edge",
+    "frontend-test-chrome": "if exist .nyc_output (rmdir /s /q .nyc_output) && nyc --nycrc-path .nycrc-frontend cypress run --browser chrome",
+    "frontend-test-edge": "if exist .nyc_output (rmdir /s /q .nyc_output) && nyc --nycrc-path .nycrc-frontend cypress run --browser edge",
+    "frontend-test": "if exist .nyc_output (rmdir /s /q .nyc_output) && nyc --nycrc-path .nycrc-frontend cypress run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@cypress/code-coverage": "^3.13.7",
+    "body-parser": "^1.20.3",
+    "chai": "^4.3.4",
+    "chai-as-promised": "^7.1.1",
+    "chai-http": "^4.3.0",
+    "cypress": "^13.16.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.1",
+    "fs": "^0.0.1-security",
+    "mocha": "^10.8.2",
+    "mongoose": "^8.8.3",
+    "nyc": "^17.1.0"
+  }
+}
