@@ -30,14 +30,14 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    - name: Fix permissions for binaries
+      run: chmod +x ./node_modules/.bin/*
+
     - name: Install Cypress binary
       run: npx cypress install
 
     - name: Debug environment variables
       run: env
-
-    - name: Ensure binaries are executable
-      run: chmod +x ./node_modules/.bin/*
 
     - name: Instrument frontend files (Linux-specific)
       run: |
