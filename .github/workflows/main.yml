@@ -19,8 +19,19 @@ jobs:
       with:
         node-version: '20.9.0'
 
+    - name: Cache Cypress binary
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/Cypress
+        key: cypress-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+        restore-keys: |
+          cypress-${{ runner.os }}-
+
     - name: Install dependencies
       run: npm install
+
+    - name: Install Cypress binary
+      run: npx cypress install
 
     - name: Debug environment variables
       run: env
