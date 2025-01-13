@@ -39,6 +39,9 @@ jobs:
     - name: Debug environment variables
       run: env
 
+    - name: Run backend tests 
+      run: npx nyc --nycrc-path .nycrc-backend mocha
+      
     - name: Instrument frontend files (Linux-specific)
       run: |
         mkdir -p instrumented
@@ -49,9 +52,6 @@ jobs:
       run: |
         if [ -d ".nyc_output" ]; then rm -rf .nyc_output; fi
         npx nyc --nycrc-path .nycrc-frontend cypress run
-
-    - name: Run backend tests
-      run: npx nyc --nycrc-path .nycrc-backend mocha
 
     - name: Upload coverage report
       if: success()
