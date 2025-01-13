@@ -3,7 +3,7 @@ name: Run Cypress and nyc Tests
 on:
   push:
     branches:
-      - test
+      - main
   pull_request:
 
 jobs:
