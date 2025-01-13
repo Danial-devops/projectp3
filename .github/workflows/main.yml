@@ -1,4 +1,4 @@
-name: Run Cypress and nyc Tests
+name: Run Cypress Tests and Deploy to GitHub Pages
 
 on:
   push:
@@ -61,7 +61,6 @@ jobs:
         name: cypress-test-results
         path: cypress/screenshots/
 
-
     - name: Upload coverage report
       if: success()
       uses: actions/upload-artifact@v3
@@ -79,19 +78,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20.9.0'
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build project
-      run: npm run build
+    - name: Verify static HTML files
+      run: ls -R
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build
+        publish_dir: ./public # Adjust this if your HTML files are stored in a different directory
