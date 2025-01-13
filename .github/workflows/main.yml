@@ -42,17 +42,16 @@ jobs:
     - name: Run backend tests 
       run: npx nyc --nycrc-path .nycrc-backend mocha
       
-    - name: Instrument frontend files (Linux-specific)
+    - name: Instrument frontend files 
       run: |
         mkdir -p instrumented
         cp -r public/* instrumented/
         npx nyc instrument public instrumented
 
-    - name: Run frontend tests (Linux-compatible)
+    - name: Run frontend tests 
       run: |
         if [ -d ".nyc_output" ]; then rm -rf .nyc_output; fi
         npx nyc --nycrc-path .nycrc-frontend cypress run
-      continue-on-error: true
 
     - name: Upload test results
       if: always()
