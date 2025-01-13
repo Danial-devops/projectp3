@@ -171,7 +171,7 @@ describe('Edit Booking Frontend Tests', () => {
         cy.stub(win, 'alert').as('alertStub');
       });
 
-      cy.get('#guests').clear().type('20');
+      cy.get('#guests').clear().type('20').blur();
       cy.get('#date').clear().type('2025-12-02');
       cy.get('button[type="submit"]').contains('Update Booking').click();
 
