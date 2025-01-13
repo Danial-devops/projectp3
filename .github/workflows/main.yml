@@ -54,6 +54,9 @@ jobs:
         npx nyc --nycrc-path .nycrc-frontend cypress run
       continue-on-error: true
 
+    - name: Ensure screenshots folder exists
+      run: mkdir -p cypress/screenshots/
+
     - name: Upload test results
       if: always()
       uses: actions/upload-artifact@v3
@@ -85,4 +88,4 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./public # Adjust this if your HTML files are stored in a different directory
+        publish_dir: ./public
