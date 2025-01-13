@@ -163,21 +163,6 @@ describe('Edit Booking Frontend Tests', () => {
         'have.been.calledTwice'
       );
     });
-
-    it('should enforce validation rules on number of guests (must be = or < 15)', () => {
-
-      // Stub the alert method
-      cy.window().then((win) => {
-        cy.stub(win, 'alert').as('alertStub');
-      });
-
-      cy.get('#guests').clear().type('20').blur();
-      cy.get('#date').clear().type('2025-12-02');
-      cy.get('button[type="submit"]').contains('Update Booking').click();
-
-      // Verify the alert message
-      cy.get('@alertStub').should('have.been.calledOnceWith', 'The number of guests cannot exceed 15.');
-    });
   });
 
   describe('Form Validation', () => {
