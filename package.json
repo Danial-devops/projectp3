@@ -9,7 +9,8 @@
     "frontend-test-all": "if exist .nyc_output (rmdir /s /q .nyc_output) && nyc --nycrc-path .nycrc-frontend cypress run --browser chrome && nyc --nycrc-path .nycrc-frontend cypress run --browser edge",
     "frontend-test-chrome": "if exist .nyc_output (rmdir /s /q .nyc_output) && nyc --nycrc-path .nycrc-frontend cypress run --browser chrome",
     "frontend-test-edge": "if exist .nyc_output (rmdir /s /q .nyc_output) && nyc --nycrc-path .nycrc-frontend cypress run --browser edge",
-    "frontend-test": "if exist .nyc_output (rmdir /s /q .nyc_output) && nyc --nycrc-path .nycrc-frontend cypress run"
+    "frontend-test": "if exist .nyc_output (rmdir /s /q .nyc_output) && nyc --nycrc-path .nycrc-frontend cypress run",
+    "build": "react-scripts build"
   },
   "keywords": [],
   "author": "",
