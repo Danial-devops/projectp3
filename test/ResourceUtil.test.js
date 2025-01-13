@@ -14,11 +14,14 @@ let baseUrl;
 let createdBookingId;
 
 describe('Edit Booking Backend Tests', () => {
-    before(async () => {
+    before(async function () {
+    this.timeout(10000); // Extend timeout
+
+    try {
         const { address, port } = await server.address();
         baseUrl = `http://${address === '::' ? 'localhost' : address}:${port}`;
+        console.log('Base URL:', baseUrl);
 
-        // Create a sample booking for testing
         const booking = new Booking({
             customerName: 'John Doe',
             date: new Date('2024-12-01'),
@@ -28,19 +31,29 @@ describe('Edit Booking Backend Tests', () => {
         });
         const savedBooking = await booking.save();
         createdBookingId = savedBooking._id.toString();
-    });
+    } catch (error) {
+        console.error('Error during setup:', error);
+        throw error;
+    }
+});
 
-    after(async () => {
-        // Delete booking made for test
+
+    after(async function () {
+    try {
         await Booking.findByIdAndDelete(createdBookingId);
-
         await mongoose.connection.close();
+        console.log('MongoDB connection closed');
         return new Promise((resolve) => {
             server.close(() => {
+                console.log('Server closed');
                 resolve();
             });
         });
-    });
+    } catch (error) {
+        console.error('Error during cleanup:', error);
+    }
+});
+
 
     describe('Edit Booking Validation', () => {
         it('should update an existing booking', (done) => {
