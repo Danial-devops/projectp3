@@ -27,6 +27,7 @@
     "fs": "^0.0.1-security",
     "mocha": "^10.8.2",
     "mongoose": "^8.8.3",
-    "nyc": "^17.1.0"
+    "nyc": "^17.1.0",
+    "react-scripts": "^3.0.1"
   }
 }
