@@ -74,6 +74,7 @@ jobs:
           .nyc_output/
 
   build:
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
