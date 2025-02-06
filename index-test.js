@@ -8,7 +8,7 @@ const CreateRoutes = require('./utils/createBookingRoute');
 const BookingRoutes = require('./utils/BookingRoute');
 const app = express();
 
-const PORT = process.env.PORT || 5050;
+const PORT = process.env.PORT || 3000;
 const DB_Connect = process.env.DB_CONNECT; 
 const startPage = "index.html";
 

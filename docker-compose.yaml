@@ -1,0 +1,9 @@
+services:
+  build-rms:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: danialdevops/projectp3:latest
+    container_name: projectp3-docker-container
+    ports:
+      - "8000:3000"
