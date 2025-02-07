@@ -3,7 +3,7 @@ name: Run Cypress Tests and Deploy to Azure
 on:
   push:
     branches:
-      - test
+      - test2
   pull_request:
 
 jobs:
