@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: projectp3-service
+spec:
+  selector:
+    app: projectp3  
+  ports:
+    - protocol: TCP
+      port: 80          
+      targetPort: 3000   
+  type: LoadBalancer     

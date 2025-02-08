@@ -74,6 +74,7 @@ jobs:
           .nyc_output/
 
   build-and-push:
+    needs: test 
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -100,9 +101,14 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+    - name: Set up kubectl
+      uses: azure/setup-kubectl@v1
 
-    - name: Deploy to Azure Web App (Container)
-      uses: azure/webapps-deploy@v3
-      with:
-        app-name: ${{ secrets.AZURE_WEBAPP_NAME }} 
-        images: ${{ secrets.AZURE_REGISTRY_LOGIN_SERVER }}/myapp:latest
+    - name: Get AKS credentials
+      run: |
+        az aks get-credentials --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} --name ${{ secrets.AKS_CLUSTER_NAME }}
+
+    - name: Deploy to AKS using kubectl
+      run: |
+        kubectl apply -f kubernetes/deployment.yaml
+        kubectl apply -f kubernetes/service.yaml

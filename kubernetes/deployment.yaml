@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projectp3-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: projectp3
+  template:
+    metadata:
+      labels:
+        app: projectp3
+    spec:
+      containers:
+        - name: projectp3
+          image: danialdevops/projectp3:latest  
+          ports:
+            - containerPort: 3000  
