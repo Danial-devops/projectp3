@@ -111,14 +111,9 @@ jobs:
       run: |
         az aks get-credentials --resource-group rmsResourceGroup --name rmsAKSCluster --overwrite-existing
 
-    - name: Some debugging
-      run: |
-        kubectl delete deployment rms-deployment
-
     - name: Deploy to AKS using kubectl
       run: |
         kubectl apply -f kubernetes/deployment.yaml
         kubectl apply -f kubernetes/service.yaml
-        kubectl rollout history deployment/rms-deployment
         kubectl get pods
         kubectl get services
