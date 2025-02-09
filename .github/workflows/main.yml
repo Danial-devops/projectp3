@@ -104,6 +104,11 @@ jobs:
     - name: Set up kubectl
       uses: azure/setup-kubectl@v1
 
+    - name: Verify Azure login identity
+      run: |
+          az ad signed-in-user show
+
+
     - name: Get AKS credentials
       run: |
         az aks get-credentials --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} --name ${{ secrets.AKS_CLUSTER_NAME }}
