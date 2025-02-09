@@ -106,7 +106,7 @@ jobs:
 
     - name: Get AKS credentials
       run: |
-        az aks get-credentials --resource-group rmsResourceGroup --name rmsAKSCluster
+        az aks get-credentials --resource-group rmsResourceGroup --name rmsAKSCluster --overwrite-existing
 
     - name: Verify kubectl context
       run: |
@@ -116,3 +116,6 @@ jobs:
       run: |
         kubectl apply -f kubernetes/deployment.yaml
         kubectl apply -f kubernetes/service.yaml
+        kubectl rollout history deployment/rms-deployment
+        kubectl get pods
+        kubectl get services
