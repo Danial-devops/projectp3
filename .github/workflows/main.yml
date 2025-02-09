@@ -111,9 +111,9 @@ jobs:
       run: |
         az aks get-credentials --resource-group rmsResourceGroup --name rmsAKSCluster --overwrite-existing
 
-    - name: Verify kubectl context
+    - name: Some debugging
       run: |
-        kubectl config current-context 
+        kubectl delete deployment rms-deployment
 
     - name: Deploy to AKS using kubectl
       run: |
