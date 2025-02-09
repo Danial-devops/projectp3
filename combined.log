@@ -1,0 +1,6 @@
+info: Demo project at: http://localhost:3000! {"timestamp":"2025-02-09T22:24:42.264Z"}
+error: Example or error log {"timestamp":"2025-02-09T22:24:42.268Z"}
+info: Demo project at: http://localhost:3000! {"timestamp":"2025-02-09T22:32:08.726Z"}
+info: Connected to MongoDB Atlas {"timestamp":"2025-02-09T22:32:09.012Z"}
+info: Demo project at: http://localhost:3000! {"timestamp":"2025-02-09T22:59:41.170Z"}
+info: Connected to MongoDB Atlas {"timestamp":"2025-02-09T22:59:41.462Z"}

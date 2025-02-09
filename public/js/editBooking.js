@@ -1,29 +1,32 @@
-// Get bookingId from the URL
+const logger = require('./logger'); 
+
 const urlParams = new URLSearchParams(window.location.search);
 const bookingId = urlParams.get('id');
 
-// Populate the Booking ID field if it's present in the URL
 if (bookingId) {
     document.getElementById("bookingId").value = bookingId;
+    logger.info(`Booking ID found in URL: ${bookingId}`);
     fetchBookingDetails(bookingId);
 }
 
-// Fetch the booking details using the booking ID
 async function fetchBookingDetails(bookingId) {
     try {
+        logger.info(`Fetching booking details for ID: ${bookingId}`);
         const response = await fetch(`/booking/${bookingId}`);
         if (!response.ok) {
             throw new Error(`Error: ${response.status}`);
         }
         const booking = await response.json();
+        logger.info(`Booking details fetched successfully for ID: ${bookingId}`);
         displayBookingDetails(booking);
     } catch (error) {
+        logger.error(`Error fetching booking details: ${error.message}`);
         alert(`Error fetching booking details: ${error.message}`);
     }
 }
 
-// Display booking details in the form fields
 function displayBookingDetails(booking) {
+    logger.info(`Displaying booking details for ${booking.customerName}`);
     document.getElementById("customerName").value = booking.customerName;
     document.getElementById("date").value = booking.date;
     document.getElementById("time").value = booking.time;
@@ -31,10 +34,9 @@ function displayBookingDetails(booking) {
     document.getElementById("specialRequests").value = booking.specialRequests;
 }
 
-// Function to handle the form submission
 function editBooking(event) {
-    event.preventDefault();  // Prevents page reload
-
+    event.preventDefault();
+    
     const bookingId = document.getElementById("bookingId").value;
     const customerName = document.getElementById("customerName").value;
     const date = document.getElementById("date").value;
@@ -42,37 +44,32 @@ function editBooking(event) {
     const numberOfGuests = document.getElementById("guests").value;
     const specialRequests = document.getElementById("specialRequests").value;
 
-    // Get current date
     const currentDate = new Date();
     const selectedDate = new Date(date);
 
-    // Limit the number of guests to 15
     if (numberOfGuests > 15) {
+        logger.warn(`Guest limit exceeded: ${numberOfGuests} (Max: 15)`);
         alert("The number of guests cannot exceed 15.");
         return;
     }
 
-    // Ensure the selected date is not before the current date
     if (selectedDate < currentDate) {
+        logger.warn(`Invalid booking date: ${date} (Past date not allowed)`);
         alert("The booking date cannot be before today.");
         return;
     }
 
-    // Time validation to between 10am - 10pm
     const [hour, minute] = time.split(':').map(Number);
     if (hour < 10 || hour > 22 || (hour === 22 && minute > 0)) {
+        logger.warn(`Invalid booking time: ${time} (Allowed: 10:00 AM - 10:00 PM)`);
         alert("Please choose a time between 10:00 AM and 10:00 PM.");
         return;
     }
 
-    const bookingData = {
-        customerName,
-        date,
-        time,
-        numberOfGuests,
-        specialRequests
-    };
+    const bookingData = { customerName, date, time, numberOfGuests, specialRequests };
 
+    logger.info(`Updating booking ID: ${bookingId}`);
+    
     var request = new XMLHttpRequest();
     request.open("PUT", `/edit-booking/${bookingId}`, true);
     request.setRequestHeader('Content-Type', 'application/json');
@@ -81,11 +78,10 @@ function editBooking(event) {
         if (request.readyState === 4) {
             if (request.status === 200) {
                 const response = JSON.parse(request.responseText);
+                logger.info(`Booking updated successfully for ID: ${bookingId}`);
                 alert("Booking updated successfully!");
 
-                // Insert the updated booking details into the table
-                const tableBody = document.getElementById("bookingTableBody");
-                tableBody.innerHTML = `
+                document.getElementById("bookingTableBody").innerHTML = `
                     <tr>
                         <td>${response.updatedBooking._id}</td>
                         <td>${response.updatedBooking.customerName}</td>
@@ -96,10 +92,13 @@ function editBooking(event) {
                     </tr>
                 `;
             } else if (request.status === 400) {
+                logger.warn(`Bad request while updating booking ID: ${bookingId}`);
                 alert("Bad Request: Please check your input data.");
             } else if (request.status === 500) {
+                logger.error(`Server error while updating booking ID: ${bookingId}`);
                 alert("Server Error: Please try again later.");
             } else {
+                logger.error(`Unexpected error: ${request.statusText}`);
                 alert("An error occurred: " + request.statusText);
             }
         }
@@ -107,4 +106,3 @@ function editBooking(event) {
 
     request.send(JSON.stringify(bookingData));
 }
-
