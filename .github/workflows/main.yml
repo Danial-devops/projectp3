@@ -104,13 +104,13 @@ jobs:
     - name: Set up kubectl
       uses: azure/setup-kubectl@v1
 
-    - name: Verify Service Principal Identity
-      run: |
-        az ad sp show --id ${{ secrets.AZURE_CREDENTIALS.clientId }}
-        
     - name: Get AKS credentials
       run: |
-        az aks get-credentials --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} --name ${{ secrets.AKS_CLUSTER_NAME }}
+        az aks get-credentials --resource-group rmsResourceGroup --name rmsAKSCluster
+
+    - name: Verify kubectl context
+      run: |
+        kubectl config current-context 
 
     - name: Deploy to AKS using kubectl
       run: |
